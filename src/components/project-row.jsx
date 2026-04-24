@@ -24,9 +24,30 @@ export function ProjectRow({ project }) {
             ))}
           </div>
 
-          <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center gap-2 text-primary">
-            <span className="font-mono text-xs hidden lg:inline">Deep Dive</span>
-            <ArrowRight className="w-4 h-4" />
+          <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center gap-3">
+            {project.paperLink && (
+              <a
+                href={project.paperLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-mono text-xs text-primary hover:underline"
+                onClick={(e) => e.stopPropagation()}
+              >
+                Paper ↗
+              </a>
+            )}
+            {project.link && (
+              <a
+                href={project.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 text-primary"
+                onClick={(e) => e.stopPropagation()}
+              >
+                <span className="font-mono text-xs hidden lg:inline">GitHub</span>
+                <ArrowRight className="w-4 h-4" />
+              </a>
+            )}
           </div>
         </div>
       </div>

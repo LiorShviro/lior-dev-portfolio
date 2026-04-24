@@ -1,36 +1,27 @@
 export const projects = [
   {
     featured: true,
-    title: 'RAG Pipeline Optimizer',
-    summary: 'Built an end-to-end retrieval-augmented generation system with dynamic chunk sizing and semantic caching. Achieved 40% latency reduction on production workloads.',
-    tags: ['Python', 'LangChain', 'Pinecone', 'FastAPI'],
+    title: 'MelechHaMamad',
+    summary:
+      'Fast-paced 2D reflex game built with React Native where players manage a safe room during an emergency — keeping adults, children, and a dog calm before the stress meter maxes out. Includes local leaderboard, haptics, and CI/CD via GitHub Actions.',
+    tags: ['React Native', 'TypeScript', 'Zustand', 'Reanimated'],
+    link: 'https://github.com/LiorShviro/cool-android-game',
   },
   {
     featured: true,
-    title: 'LLM Evaluation Framework',
-    summary: 'Developed a comprehensive evaluation suite for comparing LLM performance across factuality, coherence, and task-specific metrics using automated judging pipelines.',
-    tags: ['Python', 'OpenAI', 'Weights & Biases', 'PyTest'],
+    title: 'ML Fashion Demand Forecasting',
+    summary:
+      'ML system combining K-Means clustering, Bayesian Networks, and linear programming to predict color trends and optimize production planning in fashion retail. Published in IEEE.',
+    tags: ['Python', 'K-Means', 'Bayesian Networks', 'Jupyter'],
+    link: 'https://github.com/LiorShviro/Machine-Learning-to-Forecast-Demand-in-Fashion-Industry-',
+    paperLink: 'https://ieeexplore.ieee.org/abstract/document/11011548',
   },
   {
     featured: true,
-    title: 'Real-Time Sentiment Engine',
-    summary: 'Architected a streaming sentiment analysis pipeline processing 10K+ documents/minute with fine-tuned transformer models and Kafka-based message queues.',
-    tags: ['Spark', 'Kafka', 'HuggingFace', 'AWS'],
-  },
-  {
-    featured: true,
-    title: 'Conversational Analytics Dashboard',
-    summary: 'Created an interactive dashboard for analyzing chatbot conversations, extracting intent patterns, and identifying optimization opportunities using clustering techniques.',
-    tags: ['React', 'D3.js', 'Python', 'PostgreSQL'],
-  },
-  {
-    title: 'Document Intelligence Pipeline',
-    summary: 'Designed a multi-stage document processing pipeline combining OCR, layout analysis, and structured extraction to handle complex enterprise document types at scale.',
-    tags: ['Python', 'PyMuPDF', 'OpenAI', 'Azure'],
-  },
-  {
-    title: 'Prompt Versioning & Audit System',
-    summary: 'Built an internal toolchain for versioning, diff-ing, and auditing LLM prompts across teams. Integrated with CI/CD to catch regressions before production deploys.',
-    tags: ['Python', 'Git', 'FastAPI', 'SQLite'],
+    title: 'Deep Learning Image Classification',
+    summary:
+      'Comparative study of five architectures — from logistic regression to fine-tuned MobileNetV2 — on the STL-10 benchmark. Fine-tuned transfer learning reached 73.56% accuracy, demonstrating the gap between shallow and deep approaches.',
+    tags: ['Python', 'PyTorch', 'Transfer Learning', 'Computer Vision'],
+    link: 'https://github.com/LiorShviro/deep-learning-image-classification-comparison',
   },
 ]

@@ -14,8 +14,8 @@ export function Hero() {
                 Lior | LLM Workflows Analyst
               </h1>
               <p className="text-muted-foreground leading-relaxed max-w-md">
-                Exploring the intersection of large language models, data pipelines,
-                and production-grade AI systems. Building tools that transform research into impact.
+                Exploring machine learning, deep learning, and production AI systems.
+                From research papers to shipped apps.
               </p>
             </div>
 
@@ -31,7 +31,7 @@ export function Hero() {
 
           <div className="flex justify-center md:justify-end">
             <div className="relative">
-              <div className="w-52 h-52 md:w-64 md:h-64 rounded-full bg-secondary border border-primary/30 breathing-border overflow-hidden">
+              <div className="w-64 h-64 md:w-80 md:h-80 rounded-full bg-secondary border border-primary/30 breathing-border overflow-hidden">
                 <img
                   src={headshot}
                   alt="Lior Shviro"
