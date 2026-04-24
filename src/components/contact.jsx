@@ -31,7 +31,7 @@ export function Contact() {
   }
 
   const inputClass =
-    'w-full bg-secondary/50 border border-border px-4 py-3 font-mono text-sm text-foreground placeholder:text-muted-foreground focus:border-primary focus:outline-none transition-colors'
+    'w-full bg-secondary border border-border px-4 py-3 font-mono text-sm text-foreground placeholder:text-muted-foreground focus:border-primary focus:outline-none transition-colors'
 
   return (
     <section id="contact" className="py-32 px-6 border-t border-border">
