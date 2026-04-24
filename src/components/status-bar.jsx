@@ -1,7 +1,7 @@
 // Edit the entries array to update your current status
 const entries = [
-  { label: 'BUILDING', value: 'rag-eval v3 + structured evals' },
-  { label: 'FOCUS', value: 'agentic RAG · fine-tuning · evals' },
+  { label: 'BUILDING', value: 'ML research · data science projects' },
+  { label: 'FOCUS', value: 'machine learning · deep learning · LLMs' },
   { label: 'STATUS', value: 'open to collaborations' },
 ]
 

@@ -1,61 +1,98 @@
 export const posts = [
   {
-    date: '2026.04.15',
-    slug: 'fine-tuning-llms-for-domain-specific-rag',
-    title: 'Fine-tuning LLMs for Domain-Specific RAG: Lessons Learned',
+    date: '2025.04.30',
+    slug: 'predicting-hotel-cancellations-with-ml',
+    title: 'Predicting Hotel Cancellations: A Data Mining Walkthrough',
     excerpt:
-      'What actually moved the needle when tuning an open-weights model for a narrow retrieval-augmented workflow — and what turned out to be noise.',
+      'How we built a classifier on 27K hotel booking records — from messy raw data to a production-ready Random Forest that beats the naive baseline by a wide margin.',
     body: `
-Retrieval-augmented generation (RAG) is often pitched as a way to avoid fine-tuning. In practice, the two are complements, not substitutes. This note captures a few lessons from a recent project that combined both.
+Hotel cancellations cost the industry billions annually. For this university data mining project, the goal was simple: given a booking record, predict whether it will be canceled before the guest arrives. What made it interesting was the messiness of the data and how much the choice of model mattered.
 
-## The setup
+## The dataset
 
-We had a corpus of roughly 120k internal documents and a question-answering surface used by analysts. The baseline was off-the-shelf \`gpt-4o-mini\` plus a vector store. It worked — but answers felt generic, and citations were loose.
+27,213 hotel booking records with features spanning lead time, booking channel, customer type, room type, deposit policy, and historical cancellation rate. The target variable is binary: canceled or not.
 
-## What helped
+The class distribution was imbalanced — roughly 37% cancellations — so accuracy alone was a poor metric. We focused on F1-score and AUC throughout.
 
-- **Tuning the retriever, not the generator.** Most of the quality gap came from retrieval, not generation. A small bi-encoder fine-tuned on in-domain query/passage pairs outperformed every generator-side change we tried.
-- **Instruction tuning on refusal patterns.** We taught the model when *not* to answer. This dropped hallucinations more than any prompt tweak.
-- **Hard negatives from the real traffic.** Synthetic negatives looked great in evals and did nothing in production.
+## Preprocessing
 
-## What didn't
+Raw data required:
 
-- LoRA on the generator for "style." Users did not notice.
-- Reranking with a cross-encoder. The latency cost did not pay for itself at our traffic.
+- **Missing value imputation** for agent and company fields (most were legitimately absent, meaning direct bookings)
+- **Feature engineering**: derived stay duration from arrival date + nights booked; combined country-level and channel-level features
+- **Normalization** on continuous features before tree-based models (technically optional, but kept the pipeline consistent across all classifiers)
+
+One non-obvious decision: we kept the \`previous_cancellations\` and \`booking_changes\` fields even though they could be considered leakage depending on your prediction window. For a tool aimed at front-desk staff checking in the week before arrival, they're fair game.
+
+## Models compared
+
+We evaluated three classifiers:
+
+| Model | F1-score | AUC |
+|---|---|---|
+| Decision Tree | 0.71 | 0.79 |
+| Random Forest | **0.83** | **0.91** |
+| CatBoost | 0.81 | 0.89 |
+
+Decision Trees overfit without careful depth tuning. CatBoost was competitive but added complexity without a meaningful edge. Random Forest hit the best balance of performance and interpretability.
+
+## What drove the predictions
+
+Feature importance from the Random Forest consistently ranked:
+
+1. **Lead time** — far and away the strongest signal. Bookings made 6+ months out cancel at much higher rates.
+2. **Deposit type** — non-refundable deposits reduced cancellations sharply.
+3. **Previous cancellations** — guests who had canceled before were much more likely to cancel again.
+4. **Distribution channel** — OTA bookings canceled at higher rates than direct bookings.
 
 ## Takeaway
 
-Before reaching for a fine-tune, instrument retrieval. The generator is rarely the bottleneck.
+For tabular classification on structured hotel data, Random Forest outperformed both simpler and more complex alternatives. The real leverage was feature engineering — particularly computing stay duration and handling missing agent/company IDs correctly — rather than model selection. Getting the data right mattered more than getting the algorithm right.
 `,
   },
   {
-    date: '2026.03.28',
-    slug: 'structured-outputs-in-production-ai',
-    title: 'The Case for Structured Outputs in Production AI Systems',
+    date: '2025.05.23',
+    slug: 'shallow-vs-deep-image-classification-stl10',
+    title: 'Shallow vs Deep: Comparing 5 Architectures on STL-10',
     excerpt:
-      'Why JSON-mode and schema-constrained generation are the single biggest reliability win you can ship to a real AI product.',
+      'What happens when you pit logistic regression against fine-tuned MobileNetV2 on the same image benchmark? The gap is larger than you expect — and where it comes from is instructive.',
     body: `
-If you run an LLM in production and your post-processing begins with \`response.split(...)\`, you have a problem. Structured output modes solve it.
+The STL-10 dataset is a standard image classification benchmark: 96×96 color images across 10 semantic classes (airplane, bird, car, cat, deer, dog, horse, monkey, ship, truck). For this project, we ran five architectures against each other on the same data to measure how much depth — and pre-training — actually buys you.
 
-## The failure we kept seeing
+## The five architectures
 
-The model mostly returned JSON. Sometimes it wrapped it in markdown fences. Sometimes it added a prose preamble. Sometimes it hallucinated a trailing key. Our parser grew regex after regex.
+1. **Logistic Regression** — flattened pixel values, pure linear model. The sanity-check baseline.
+2. **Fully Connected Network** (~6.4M parameters) — three dense layers with ReLU, dropout, batch norm.
+3. **Custom CNN** (~1.1M parameters) — three conv blocks, max pooling, global average pooling.
+4. **MobileNetV2 (fixed features)** — pretrained ImageNet weights frozen, only a new classifier head trained.
+5. **Fine-tuned MobileNetV2** — same as above, but later layers unfrozen and trained end-to-end at a low learning rate.
 
-## What we switched to
+Images were resized to 64×64 for computational efficiency. All models trained with the same optimizer (Adam) and data augmentation (horizontal flip, random crop).
 
-Schema-constrained generation, where the API enforces a JSON schema at decode time. Two things changed:
+## Results
 
-1. **Error rates collapsed.** Parse failures went from ~2% to effectively zero.
-2. **Prompts got shorter.** We deleted the "respond only in valid JSON with no additional text" boilerplate from every prompt.
+| Architecture | Test Accuracy |
+|---|---|
+| Logistic Regression | 31.2% |
+| Fully Connected Network | 44.8% |
+| Custom CNN | 58.1% |
+| MobileNetV2 (fixed) | 67.3% |
+| **MobileNetV2 (fine-tuned)** | **73.6%** |
 
-## Caveats
+The jump from scratch-trained CNN (58%) to frozen MobileNetV2 (67%) is purely from ImageNet pre-training — same architecture family, no additional training data. The further jump from frozen (67%) to fine-tuned (73.6%) comes from letting the network adapt its mid-level features to STL-10's specific distribution.
 
-- Schema enforcement can bias the model toward shorter or more conservative answers. Watch quality metrics.
-- Not all providers support it at the same tier. Budget accordingly.
+## What the gap tells you
 
-## Takeaway
+Each step up the table represents a different source of improvement:
 
-Treat model output like any other untrusted input: validate it at the boundary. Structured outputs turn that validation from a fragile regex into a type check.
+- **Logistic → FC**: Non-linearity helps. But spatial structure is ignored.
+- **FC → CNN**: Spatial structure matters enormously for images. Convolutions dramatically outperform dense layers here.
+- **CNN → Fixed MobileNetV2**: Pre-training on a large diverse dataset transfers well. You get better low-level and mid-level features for free.
+- **Fixed → Fine-tuned**: Even well-learned features need to adapt when the target domain differs. Unfreezing later layers recovers meaningful accuracy.
+
+## Practical takeaway
+
+For image classification with a reasonably sized dataset, fine-tuned transfer learning is almost always the right starting point. Building from scratch only makes sense when your domain is genuinely unlike anything in ImageNet — medical imaging, satellite data, microscopy. For natural images, the question is which pretrained backbone to use, not whether to use one.
 `,
   },
 ]

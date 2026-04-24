@@ -24,4 +24,12 @@ export const projects = [
     tags: ['Python', 'PyTorch', 'Transfer Learning', 'Computer Vision'],
     link: 'https://github.com/LiorShviro/deep-learning-image-classification-comparison',
   },
+  {
+    featured: true,
+    title: 'Hotel Cancellation Prediction',
+    summary:
+      'Data mining project on 27K hotel booking records to predict cancellations. Compared Decision Tree, Random Forest, and CatBoost classifiers using F1-score and AUC — Random Forest selected as the final model.',
+    tags: ['Python', 'scikit-learn', 'CatBoost', 'Data Mining'],
+    link: 'https://github.com/LiorShviro/hotel-cancellation-prediction',
+  },
 ]
