@@ -14,8 +14,10 @@ export function Hero() {
                 Lior | LLM Workflows Analyst
               </h1>
               <p className="text-muted-foreground leading-relaxed max-w-md">
-                Exploring machine learning, deep learning, and production AI systems.
-                From research papers to shipped apps.
+                Data Scientist and ML researcher who loves solving problems and bringing
+                ideas to life with modern tools. I work across the ML stack — deep learning,
+                predictive modeling, LLMs, and more. I publish research, build models, and
+                create things end to end — sometimes I even build games.
               </p>
             </div>
 

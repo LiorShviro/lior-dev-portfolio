@@ -6,6 +6,7 @@ export const projects = [
       'Fast-paced 2D reflex game built with React Native where players manage a safe room during an emergency — keeping adults, children, and a dog calm before the stress meter maxes out. Includes local leaderboard, haptics, and CI/CD via GitHub Actions.',
     tags: ['React Native', 'TypeScript', 'Zustand', 'Reanimated'],
     link: 'https://github.com/LiorShviro/cool-android-game',
+    gameLink: 'https://liorshviro.github.io/cool-android-game/play/',
   },
   {
     featured: true,

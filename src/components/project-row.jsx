@@ -25,6 +25,17 @@ export function ProjectRow({ project }) {
           </div>
 
           <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center gap-3">
+            {project.gameLink && (
+              <a
+                href={project.gameLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-mono text-xs text-primary hover:underline"
+                onClick={(e) => e.stopPropagation()}
+              >
+                Play ↗
+              </a>
+            )}
             {project.paperLink && (
               <a
                 href={project.paperLink}
