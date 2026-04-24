@@ -11,13 +11,13 @@ export function Hero() {
                 Data Scientist & LLM Analyst
               </p>
               <h1 className="text-3xl md:text-4xl lg:text-5xl font-serif leading-tight text-foreground text-balance">
-                Lior | LLM Workflows Analyst
+                Lior | Data Scientist
               </h1>
               <p className="text-muted-foreground leading-relaxed max-w-md">
-                Data Scientist and ML researcher who loves solving problems and bringing
-                ideas to life with modern tools. I work across the ML stack — deep learning,
+                 and ML researcher who loves solving problems and bringing
+                ideas to life with modern tools. I work across the ML stack - deep learning,
                 predictive modeling, LLMs, and more. I publish research, build models, and
-                create things end to end — sometimes I even build games.
+                create things end to end - sometimes I even build games.
               </p>
             </div>
 
