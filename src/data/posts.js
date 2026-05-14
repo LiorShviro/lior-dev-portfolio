@@ -95,4 +95,32 @@ Each step up the table represents a different source of improvement:
 For image classification with a reasonably sized dataset, fine-tuned transfer learning is almost always the right starting point. Building from scratch only makes sense when your domain is genuinely unlike anything in ImageNet — medical imaging, satellite data, microscopy. For natural images, the question is which pretrained backbone to use, not whether to use one.
 `,
   },
+  {
+    date: '2026.05.14',
+    slug: 'lecturing-at-bar-ilan-ai-careers',
+    title: 'Back at Bar-Ilan, This Time as the Speaker',
+    excerpt:
+      'From sterile pharma labs to Salesforce automation - what I told engineering students about what working with LLMs and ASR actually looks like in production.',
+    body: `
+Not long ago I was sitting in Bar-Ilan lecture halls as a student. Earlier this year I was invited back - this time to the open day, standing in front of incoming engineering students with Prof. Orit Shafy, talking about what the field looks like from the inside.
+
+The session was called *"From Engineering Studies to Employment in the AI Era."* My part was about what I actually do: building AI-powered workflows, and the gap between what people imagine that looks like and what it actually is.
+
+## The use cases I brought
+
+I walked through two concrete projects. One was in sterile pharmaceutical labs - environments with strict protocols where any process change has regulatory implications. AI there isn't a chatbot; it's about making existing human workflows faster, more consistent, and auditable. The other was automating sales reporting in Salesforce - turning messy CRM data and rep activity into structured reports without manual cleanup. Different domains, same underlying challenge: getting a model to do useful, reliable work on real organizational data.
+
+## What people don't see
+
+The part that surprised the students most was the behind-the-scenes reality of combining LLMs with ASR (automatic speech recognition). When your system listens to someone speak and then reasons over what was said, every layer adds failure modes - transcription errors that sound plausible, model outputs that are fluent but wrong, edge cases that only appear in production. Ensuring accuracy in a critical system means building evaluation, not just trust. You need to know when the system is wrong before a user does.
+
+## What Bar-Ilan gave me
+
+The last thing I talked about was the full-circle part: I studied here, and the practical projects and proximity to faculty doing real research built the foundation I work from now. Not because the coursework maps directly to the job - it doesn't always - but because it taught me how to approach a problem I've never seen before.
+
+The recording is on YouTube - my segment starts around the 10-minute mark.
+
+[Watch the lecture →](https://www.youtube.com/watch?v=7uvIgiyg6bY&t=614s)
+`,
+  },
 ]
